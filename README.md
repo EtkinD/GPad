@@ -51,8 +51,8 @@ Execute "create_venv.bat" batch file. It will create virtual environment and ins
 There is an example batch file named "example.bat"
 
 - Create a new batch file wherever you want.
-- Copy and past everything inside "example.bat"
-- Change file location with this folder's location inside new batch file.
+- Copy and paste everything inside "example.bat"
+- Change file location with this folder location inside new batch file.
 - Finally, if you double click your batch file, it will start program and opens a terminal. Do not close terminal. If you do that, program will be terminated.
 
 ## Default Actions
