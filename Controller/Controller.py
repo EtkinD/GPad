@@ -10,16 +10,17 @@ from Controller._dict import sticks, triggers, dpads, buttons
 
 class Controller:
 
-    def __init__(self, gamepad, id: int, state: dict, listener: Listener):
+    def __init__(self, gamepad, device_id: int, state: dict, listener: Listener):
         # initializing gamepad event environment.
         self._gamepad = gamepad
-        self.id = id
+        self.device_id = device_id
+        self.device_key = gamepad._device_path
         self.state: dict = state
         self._listener: Listener = listener
         # Starting controller thread.
         self._loop = Thread(target=self._run)
         self._loop.start()
-        print(f'Session started for {self._gamepad} {self.id}')
+        print(f'Session started for {self._gamepad} {self.device_id}')
 
     def join(self):
         self._loop.join()
@@ -30,14 +31,14 @@ class Controller:
                 for event in self._gamepad.read():
                     self.handle_event(event)
             except UnpluggedError:
-                print(f'Controller {self.id} unplugged.')
+                print(f'Controller {self.device_id} unplugged.')
                 self.state['alive'] = False
                 break
             except Exception:
-                print(f'Controller {self.id} crashed.')
+                print(f'Controller {self.device_id} crashed.')
                 self.state['alive'] = False
                 break
-        print(f'Session finished for {self._gamepad} {self.id}')
+        print(f'Session finished for {self._gamepad} {self.device_id}')
 
     def handle_event(self, event):
         if event.ev_type == 'Key':

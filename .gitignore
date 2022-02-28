@@ -8,3 +8,9 @@ venv/
 # Ide settings
 .vscode/
 .idea
+
+# Test files
+test/
+
+# Log files
+Logs/
